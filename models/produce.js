@@ -10,7 +10,7 @@ Produce.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        product_name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false, 
         },
@@ -24,13 +24,13 @@ Produce.init(
         },
         availability:{
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            allowNull: true,
         },
         filename:{
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
-        farmer_id:{
+        farmerId:{
             type: DataTypes.STRING,
             references: {
                 model: 'farmer',
