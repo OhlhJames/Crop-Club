@@ -40,3 +40,5 @@ Produce.init(
 
     }
 )
+
+module.exports = Produce
