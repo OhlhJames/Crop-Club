@@ -23,4 +23,4 @@ const seedProduce = async () => {
 };
 
 // Call the seedProduce function to populate the database with produce data
-seedProduce();
+module.exports = seedProduce();

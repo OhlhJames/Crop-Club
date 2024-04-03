@@ -23,4 +23,4 @@ const seedReviews = async () => {
 };
 
 // Call the seedReviews function to populate the database with review data
-seedReviews();
+module.exports = seedReviews();
