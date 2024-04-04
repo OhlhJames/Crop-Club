@@ -1,4 +1,5 @@
-const { Farmer } = require('../models/farmer'); // Import the Farmer model
+const Farmer = require('../models/farmer');
+const sequelize = require('../config/connection');
 
 const farmerData = [
   {
@@ -13,9 +14,16 @@ const farmerData = [
     location: '456 Sunshine Lane, Countryside, USA',
     user_id: 2, 
   },
- 
 ];
 
-const seedFarmers = () => Farmer.bulkCreate(farmerData); // Seed the Farmer table with the farmerData array
+const seedFarmers = async () => {
+  try {
+    await sequelize.sync({ alter: true });
+    await Farmer.bulkCreate(farmerData);
+    console.log('Farmers seeded successfully');
+  } catch (error) {
+    console.error('Error seeding farmers:', error);
+  }
+};
 
-module.exports = seedFarmers; // Export the seedFarmers function
+module.exports = seedFarmers;

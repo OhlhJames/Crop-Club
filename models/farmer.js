@@ -12,8 +12,8 @@ Farmer.init(
             primaryKey: true,
         },
         farm_name: {
-             type: DataTypes.STRING,
-             allowNull: false,
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         description: {
             type: DataTypes.STRING,
@@ -23,13 +23,20 @@ Farmer.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key:'id',
+                key: 'id',
             },
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
         },
     },
     {
@@ -37,7 +44,7 @@ Farmer.init(
         freezeTableName: true,
         underscored: true,
         modelName: 'farmer',
-      }
-)
+    }
+);
 
 module.exports = Farmer;
