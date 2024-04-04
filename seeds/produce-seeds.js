@@ -1,4 +1,4 @@
-const {Produce} = require('./models'); // Imports database models
+const {Produce} = require('../models/produce'); // Imports database models
 
 
 const produceData = [

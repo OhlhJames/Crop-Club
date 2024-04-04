@@ -1,4 +1,4 @@
-const {Review} = require('./models'); // Imports database models
+const {Review} = require('../models'); // Imports database models
 
 
 // Sample review data
