@@ -18,34 +18,34 @@ User.init(
         },
         username: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
-              isEmail: true,
+                isEmail: true,
             },
-          },
-          password: {
+        },
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [6],
-              },
-          },
+            },
+        },
     },
     {
         hooks: {
             async beforeCreate(newUserData) {
-                newUserData.password = await bycrypt.hash(newUserData.password, 10);
+                newUserData.password = await bcrypt.hash(newUserData.password, 10); // Corrected typo here
                 return newUserData;
             },
         },
         sequelize,
-        timestamps:true,
-        freezeTableName:true,
+        timestamps: true,
+        freezeTableName: true,
         modelName: 'user',
     }
 );

@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-class Produce extends Model{};
+
+class Produce extends Model {}
 
 Produce.init(
     {
@@ -12,33 +13,39 @@ Produce.init(
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false, 
+            allowNull: false,
         },
-        description: { 
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        price:{
+        price: {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        availability:{
+        availability: {
             type: DataTypes.BOOLEAN,
             allowNull: true,
         },
-        filename:{
+        filename: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        farmerId:{
-            type: DataTypes.STRING,
+        farmerId: { // Corrected foreign key name
+            type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'farmer',
                 key: 'id',
             },
         },
-
+    },
+    {
+        sequelize,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'produce',
     }
-)
+);
 
-module.exports = Produce
+module.exports = Produce;

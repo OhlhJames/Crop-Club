@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 // Routes
-app.use(require('./controllers/'));
+app.use(require('./controllers/api'));
 
 // Database synchronization
 sequelize.sync({ force: false }).then(() => {
