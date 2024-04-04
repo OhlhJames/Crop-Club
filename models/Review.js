@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 class Reviews extends Model{};
 
-Produce.init(
+Reviews.init(
     {
         id:{
             type: DataTypes.INTEGER,

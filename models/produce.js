@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-class Produce extends Model{};
+class Produce extends Model{}
 
 Produce.init(
     {
@@ -38,7 +38,14 @@ Produce.init(
             },
         },
 
+    },
+    {
+            sequelize,
+            freezeTableName: true,
+            underscored: true,
+            modelName: 'produce', 
     }
+
 )
 
 module.exports = Produce

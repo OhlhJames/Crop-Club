@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const sequelize = require('./config/connection');
 
 
@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 // Routes
-app.use(require('./controllers/'));
+app.use(require('./controllers/api'));
 
 // Database synchronization
 sequelize.sync({ force: false }).then(() => {
