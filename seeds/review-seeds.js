@@ -1,24 +1,30 @@
-const {Review} = require('../models'); // Imports database models
+const Review = require('../models/review'); // Assuming you have a Review model
+const sequelize = require('../config/connection');
 
-
-// Sample review data
 const reviewData = [
   { 
     rating: 5, 
     comment: 'Delicious apples!', 
-    userId: 1, 
-    produceId: 1 
+    userId: 1, // Assuming you have the correct foreign key reference
+    produceId: 1, // Assuming you have the correct foreign key reference
   },
   { 
     rating: 4, 
     comment: 'Great eggs, very fresh.', 
-    userId: 2, 
-    produceId: 2 
+    userId: 2, // Assuming you have the correct foreign key reference
+    produceId: 2, // Assuming you have the correct foreign key reference
   },
-  // Add sample review data as needed
+  // Add more review data as needed
 ];
 
-    // Create sample reviews
-const seedReviews = () => Review.bulkCreate(reviewData);
-// Call the seedReviews function to populate the database with review data
+const seedReviews = async () => {
+  try {
+    await sequelize.sync({ alter: true });
+    await Review.bulkCreate(reviewData);
+    console.log('Reviews seeded successfully');
+  } catch (error) {
+    console.error('Error seeding reviews:', error);
+  }
+};
+
 module.exports = seedReviews;
