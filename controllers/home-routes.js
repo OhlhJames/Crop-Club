@@ -32,4 +32,18 @@ router.post('/farmer', async (req,res) => {
     }
 });
 
+
+router.post('/reviews', async (req,res) => {
+    try{
+      const reviewData = await Reviews.create({
+       comment: req.body.comment,
+       rating: req.body.rating,
+       userId: req.body.userId,
+       produceId: req.body.produceId
+      });
+     res.status(200).json(reviewData);   
+    }catch (err) {
+     res.status(500).json(err)
+    }  
+   })
 module.exports = router
