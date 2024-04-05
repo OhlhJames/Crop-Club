@@ -78,3 +78,22 @@ router.get('/reviews/:produceId', async (req, res) => {
     res.status(500).json(err);
     }
  });
+
+ router.delete('/reviews/:id' , async (req, res) => {
+    try{
+     const deletedReview = await Reviews.destroy({
+     where: {
+      id: req.params.id
+      }
+     })
+     if (!deletedReview) {
+        return res.status(404).json({ error: 'Review not found' });
+      }
+    
+      res.status(200).json({ message: 'Review deleted successfully' });
+    }catch (err){
+    res.status(500).json(err)
+    }
+    })
+
+    module.exports = router
