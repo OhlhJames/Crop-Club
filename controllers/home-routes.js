@@ -67,4 +67,14 @@ router.get('/Produce', async (req,res) => {
     }  
 });
 
-module.exports = router
+
+router.get('/reviews/:produceId', async (req, res) => {
+    try{
+     const reviewData = await Reviews.findByPk(req.params.produceId, { 
+       attributes:{}
+       });
+       res.status(200).json(reviewData);
+    }catch (err){
+    res.status(500).json(err);
+    }
+ });
