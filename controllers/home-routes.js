@@ -32,7 +32,6 @@ router.post('/farmer', async (req,res) => {
     }
 });
 
-
 router.post('/reviews', async (req,res) => {
     try{
       const reviewData = await Reviews.create({
@@ -45,8 +44,28 @@ router.post('/reviews', async (req,res) => {
     }catch (err) {
      res.status(500).json(err)
     }  
-   })
-module.exports = router
+});
+
+router.get('/Produce', async (req,res) => {
+    try{
+      const produceData = await Produce.findAll({
+        attributes: {},
+        order: [['name', 'ASC']],
+      });
+      const produceList = produceData.map((data) => data.get({ plain: true}));
+    //  res.render('produce_Page',{
+    //     name,
+    //     description,
+    //     price,
+    //     availability,
+    //     filename,
+    //     farmerId,
+    //  }); 
+    res.status(200).json(produceList)  
+    }catch (err) {
+     res.status(500).json(err)
+    }  
+});
 
 
 router.get('/reviews/:produceId', async (req, res) => {
@@ -58,4 +77,4 @@ router.get('/reviews/:produceId', async (req, res) => {
     }catch (err){
     res.status(500).json(err);
     }
-    })
+ });
