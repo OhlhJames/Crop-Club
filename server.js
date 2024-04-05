@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 // const cookieParser = require('cookie-parser');
 const sequelize = require('./config/connection');
-
+const routes = require('./controllers')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,7 +27,8 @@ app.use(session({
 }));
 
 // Routes
-app.use(require('./controllers/api'));
+app.use(routes);
+
 
 // Database synchronization
 sequelize.sync({ force: false }).then(() => {
