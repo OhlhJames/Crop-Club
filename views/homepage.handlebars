@@ -1,0 +1,53 @@
+<!-- Hero Section -->
+<section class="hero">
+    <h2>Welcome to Crop-Club</h2>
+    <p>Discover the best local produce and support your farming community.</p>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <h3>Why Choose Crop-Club?</h3>
+    <div class="features-container">
+        <div class="feature">
+            <h4>Fresh Produce</h4>
+            <p>Access a variety of fresh and locally grown fruits and vegetables.</p>
+        </div>
+        <div class="feature">
+            <h4>Support Local</h4>
+            <p>Each purchase helps support local farmers and sustainable practices.</p>
+        </div>
+        <div class="feature">
+            <h4>Community Driven</h4>
+            <p>Join a community that values health, quality, and connection.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Farmers Section -->
+<section class="featured-farmers">
+    <h3>Meet Our Farmers</h3>
+    <div class="farmers-list">
+        <!-- Assume 'farmers' is an array of farmer objects passed to the template -->
+        {{#each farmers}}
+        <article class="farmer-profile">
+            <h4>{{this.name}}</h4>
+            <p>{{this.bio}}</p>
+        </article>
+        {{/each}}
+    </div>
+</section>
+
+<!-- Latest Produce Section -->
+<section class="latest-produce">
+    <h3>Latest Produce</h3>
+    <div class="produce-list">
+        <!-- Assume 'produce' is an array of produce objects passed to the template -->
+        {{#each produce}}
+        <article class="produce-item">
+            <h4>{{this.name}}</h4>
+            <p>{{this.description}}</p>
+            <p>Price: ${{this.price}}</p>
+        </article>
+        {{/each}}
+    </div>
+</section>
