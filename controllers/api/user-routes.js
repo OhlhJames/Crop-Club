@@ -33,11 +33,11 @@ router.post('/login',async (req,res) => {
 
      //checks to see if email matches
      if(!dbUserData){
-        res.status(400).json({messsage: "Wrong email or password"});
+        res.status(400).json({message: "Wrong email or password"});
         return;
      }
 
-     const validPassword = await dbUserData.checkPasswor(req.body.password);
+     const validPassword = await dbUserData.checkPassword(req.body.password);
 
      //checks to see if passwoprd matches
      if(!validPassword){
