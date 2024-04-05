@@ -1,4 +1,4 @@
-const Review = require('../models/review'); // Assuming you have a Review model
+const Review = require('../models/Review'); // Assuming you have a Review model
 const sequelize = require('../config/connection');
 
 const reviewData = [

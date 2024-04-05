@@ -30,17 +30,10 @@ Farmer.init(
                 key: 'id',
             },
         },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
     },
     {
         sequelize,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: 'farmer',

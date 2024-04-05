@@ -20,7 +20,6 @@ router.post('/', async (req, res) => {
        res.status(500).json(err);
     }
 });
-
 //this is to log in 
 router.post('/login',async (req,res) => {
     //finds the user by inputed email
