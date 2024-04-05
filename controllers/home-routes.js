@@ -68,7 +68,7 @@ router.get('/Produce', async (req,res) => {
 });
 
 
-router.get('/reviews/:produceId', async (req, res) => {
+router.get('/reviews/id' ,async (req, res) => {
     try{
      const reviewData = await Reviews.findByPk(req.params.produceId, { 
        attributes:{}
