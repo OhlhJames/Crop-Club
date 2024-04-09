@@ -3,29 +3,29 @@ const {User, Farmer, Reviews, Produce} = require('../models/index');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-   try {
-     const farmerData = await Farmer.findAll({
-       include: [
-         {
-           model: Produce,
-           attributes: ['filename', 'description'],
-         },
-       ],
-     });
- 
-     const farmer = farmerData.map((farmer) =>
-       farmer.get({ plain: true })
-     );
- 
-     res.render('homepage', {
-       farmer,
-       loggedIn: req.session.loggedIn,
-     });
-   } catch (err) {
-     console.log(err);
-     res.status(500).json(err);
-   }
- });
+try {
+   const farmerData = await Farmer.findAll({
+      include: [
+      {
+         model: Produce,
+         attributes: ['filename', 'description'],
+      },
+      ],
+   });
+
+   const farmer = farmerData.map((farmer) =>
+      farmer.get({ plain: true })
+   );
+
+   res.render('homepage', {
+      farmer,
+      loggedIn: req.session.loggedIn,
+   });
+} catch (err) {
+   console.log(err);
+   res.status(500).json(err);
+}
+});
 
 router.post('/produce', async (req,res) => {
     try{
@@ -74,19 +74,17 @@ router.post('/reviews', async (req,res) => {
 router.get('/Produce', async (req,res) => {
     try{
       const produceData = await Produce.findAll({
-        attributes: {},
-        order: [['name', 'ASC']],
+        include: [
+         {
+            model: Reviews,
+            attributes: ['userId','rating','comment']
+         }
+        ]
       });
-      const produceList = produceData.map((data) => data.get({ plain: true}));
-    //  res.render('produce_Page',{
-    //     name,
-    //     description,
-    //     price,
-    //     availability,
-    //     filename,
-    //     farmerId,
-    //  }); 
-    res.status(200).json(produceList)  
+      const produce = produceData.map((product) => product.get({ plain: true}));
+     res.render('produce',{
+        produce,
+     });   
     }catch (err) {
      res.status(500).json(err)
     }  
@@ -104,57 +102,57 @@ router.get('/reviews/id' ,async (req, res) => {
     }
  });
 
- router.delete('/reviews/:id' , async (req, res) => {
-    try{
-     const deletedReview = await Reviews.destroy({
-     where: {
+router.delete('/reviews/:id' , async (req, res) => {
+   try{
+   const deletedReview = await Reviews.destroy({
+   where: {
+   id: req.params.id
+   }
+   })
+   if (!deletedReview) {
+      return res.status(404).json({ error: 'Review not found' });
+   }
+   
+   res.status(200).json({ message: 'Review deleted successfully' });
+   }catch (err){
+   res.status(500).json(err)
+   }
+   });
+
+router.get('/farmer', async (req, res) => {
+   try{
+      const farmerData = await Farmer.findAll({
+         attributes: {}
+         });
+         const farmerList = farmerData.map((data) => data.get({plain: true}));
+         res.status(200).json(farmerList);
+         }catch(err){
+         res.status(500).json(err)
+         };
+      });
+
+router.put('/farmer/:id' , async (req, res) => {
+   try{
+   const updatedFarmer = await Farmer.update({
+   farm_name: req.body.farm_name,
+   description: req.body.description,
+   location: req.body.location
+   },
+      {
+      where: {
       id: req.params.id
-      }
-     })
-     if (!deletedReview) {
-        return res.status(404).json({ error: 'Review not found' });
-      }
-    
-      res.status(200).json({ message: 'Review deleted successfully' });
-    }catch (err){
-    res.status(500).json(err)
-    }
-    });
-
-    router.get('/farmer', async (req, res) => {
-        try{
-         const farmerData = await Farmer.findAll({
-           attributes: {}
-           });
-          const farmerList = farmerData.map((data) => data.get({plain: true}));
-          res.status(200).json(farmerList);
-          }catch(err){
-          res.status(500).json(err)
-          };
-        });
-
-    router.put('/farmer/:id' , async (req, res) => {
-         try{
-         const updatedFarmer = await Farmer.update({
-         farm_name: req.body.farm_name,
-         description: req.body.description,
-         location: req.body.location
-         },
-          {
-          where: {
-            id: req.params.id
-         }
-          })
-             
-         if(!updatedFarmer){
-         return  res.status(404).json({err: 'Produce not found'});
-         }
+   }
+      })
          
-         res.status(200).json({message: 'Produce updated successfully}'});
-         }catch (err){
-        res.status(500).json(err)
-        
-     }
+   if(!updatedFarmer){
+   return  res.status(404).json({err: 'Produce not found'});
+   }
+   
+   res.status(200).json({message: 'Produce updated successfully}'});
+   }catch (err){
+   res.status(500).json(err)
+   
+}
 })
 // need to figure out how to delete a parent key 
 router.delete('/produce/:id', async (req, res) => {
@@ -174,8 +172,8 @@ router.delete('/produce/:id', async (req, res) => {
 });
 
 router.put('/produce/:id' , async (req,res) => {
-    try{
-     const updatedProduce = await Produce.update({
+   try{
+   const updatedProduce = await Produce.update({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -185,45 +183,45 @@ router.put('/produce/:id' , async (req,res) => {
       },
       {
       where: {
-        id: req.params.id
-        }
-      });
-     if(!updatedProduce){
-     return  res.status(404).json({err: 'Produce not found'});
-     }
-     
-     res.status(200).json({message: 'Produce updated successfully'});
-    }catch (err){
-    res.status(500).json(err)
-    
-    }
-    });
-                
-
-    router.get('/produce/:id' ,async (req, res) => {
-      try{
-       const ProduceData = await Produce.findByPk(req.params.id, { 
-         attributes:{}
-         });
-         res.status(200).json(ProduceData);
-      }catch (err){
-      res.status(500).json(err);
-      }
-   });
-   
-   router.delete('/farmer/:id' , async (req, res) => {
-      try{
-      const  deletedFarmer = await Farmer.destroy({ 
-      where: {
       id: req.params.id
       }
-       })
-       if(!deletedFarmer){ 
-      return res.status(404).json({message: 'Farmer not found'})
-       }
-       res.status(200).json({message: 'Farmer was deleted'})
-      }catch (err){
-      res.status(500).json(err);
+      });
+   if(!updatedProduce){
+   return  res.status(404).json({err: 'Produce not found'});
+   }
+   
+   res.status(200).json({message: 'Produce updated successfully'});
+   }catch (err){
+   res.status(500).json(err)
+   
+   }
+   });
+               
+
+router.get('/produce/:id' ,async (req, res) => {
+try{
+   const ProduceData = await Produce.findByPk(req.params.id, { 
+   attributes:{}
+   });
+   res.status(200).json(ProduceData);
+}catch (err){
+res.status(500).json(err);
+}
+});
+   
+router.delete('/farmer/:id' , async (req, res) => {
+   try{
+   const  deletedFarmer = await Farmer.destroy({ 
+   where: {
+   id: req.params.id
+   }
+      })
+      if(!deletedFarmer){ 
+   return res.status(404).json({message: 'Farmer not found'})
       }
-   })
-      module.exports = router
+      res.status(200).json({message: 'Farmer was deleted'})
+   }catch (err){
+   res.status(500).json(err);
+   }
+})
+module.exports = router

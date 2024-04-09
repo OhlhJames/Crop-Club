@@ -1,8 +1,4 @@
 
-<section class="produce">
-  <img src="/images/{{filename}}" alt="{{description}}">
-  <div class="painting-details">
-    <h3>{{name}}</h3>
-    <p>Farm: {{farmerId}}</p>
-  </div>
-</section>
+{{#each produce as |product|}}
+{{> product-details}}
+{{/each}}
