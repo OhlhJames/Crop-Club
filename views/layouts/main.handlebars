@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Crop-Club</title>
-    <!-- Link to your stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Add other head elements like external fonts or scripts here -->
 
 </head>
 <body>
-    <header>
-       
-    </header>
+
+    <!-- Background container for the full-page background image -->
+    <div class="background-container" id="background-container"></div>
+
+    <nav class="sidebar">
+        <!-- Sidebar content -->
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/payments">Payments</a></li>
+            <li><a href="/analytics">Analytics</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/reports">Reports</a></li>
+            <li><a href="/customers">Customers</a></li>
+            <!-- Settings and other links -->
+            <li><a href="/settings">Settings</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/notifications">Notifications</a></li>
+        </ul>
+    </nav>
+
 
     <main>
         {{{body}}}
@@ -22,7 +38,9 @@
     <footer>
         <p>&copy; 2024 Crop-Club. All rights reserved.</p>
     </footer>
-    <!-- Link to your JavaScript file -->
-    <script src="/js/index.js"></script>
+
+    <!-- Link to your JavaScript files -->
+    <script src="/js/script.js"></script>
+    <script src="/js/images.js"></script>
 </body>
 </html>
