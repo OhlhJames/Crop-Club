@@ -9,6 +9,7 @@
     --headline: #CBD1D8;
     --expand-button: #353E47;
     --logout: #FA7575;
+    --farm-background:#85B79E;
   }
   
   body {
@@ -55,7 +56,16 @@
     transition: width 0.1s ease-in-out;
     z-index: 100; /* Make sure sidebar is above background */
   }
-  
+  .card {
+    display: flex;
+    margin: 20px;
+    flex: 0 1 300px;
+    max-width: 25%;
+    border: 10px var(--primary-color);
+    border-radius: 10px;
+    background-color: var(--farm-background);
+    color: var(--primary-color);
+  }
   
   body.collapsed .sidebar {
     max-width: 5rem;

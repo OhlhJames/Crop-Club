@@ -7,6 +7,7 @@ const produceData = [
     description: 'Fresh apples from Happy Farm.',
     price: 2.99,
     availability: true,
+    filename: 'apples.jpg',
     farmerId: 1, // Updated to match the foreign key reference
   },
   {
@@ -14,6 +15,7 @@ const produceData = [
     description: 'Organic eggs from Sunshine Acres.',
     price: 3.99,
     availability: true,
+    filename: 'eggs.jpg',
     farmerId: 2, // Updated to match the foreign key reference
   },
 ];
