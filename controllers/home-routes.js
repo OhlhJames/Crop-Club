@@ -2,6 +2,31 @@ const router = require('express').Router();
 const {User, Farmer, Reviews, Produce} = require('../models/index');
 const withAuth = require('../utils/auth');
 
+router.get('/', async (req, res) => {
+   try {
+     const farmerData = await Farmer.findAll({
+       include: [
+         {
+           model: Produce,
+           attributes: ['filename', 'description'],
+         },
+       ],
+     });
+ 
+     const farmer = farmerData.map((farmer) =>
+       farmer.get({ plain: true })
+     );
+ 
+     res.render('homepage', {
+       farmer,
+       loggedIn: req.session.loggedIn,
+     });
+   } catch (err) {
+     console.log(err);
+     res.status(500).json(err);
+   }
+ });
+
 router.post('/produce', async (req,res) => {
     try{
        const produceData = await Produce.create({
