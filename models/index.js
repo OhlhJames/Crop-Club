@@ -19,6 +19,13 @@ User.hasOne(Farmer, {
   Produce.belongsTo(Farmer, {
     foreignKey: 'farmerId',
   });
+  Produce.hasMany(Reviews, {
+    foreignKey: 'produceId',
+    onDelete: 'CASCADE',
+  });
+  Reviews.belongsTo(Produce, {
+    foreignKey: 'produceId',
+  });
   // A User can have many Reviews
   User.hasMany(Reviews, {
     foreignKey: 'userId',
