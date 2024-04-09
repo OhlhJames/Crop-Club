@@ -178,3 +178,15 @@ router.put('/produce/:id' , async (req,res) => {
 
 
     module.exports = router
+
+    router.get('/produce/:id' ,async (req, res) => {
+      try{
+       const ProduceData = await Produce.findByPk(req.params.Id, { 
+         attributes:{}
+         });
+         res.status(200).json(ProduceData);
+      }catch (err){
+      res.status(500).json(err);
+      }
+   });
+   
