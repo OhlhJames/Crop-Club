@@ -94,6 +94,87 @@ router.get('/reviews/id' ,async (req, res) => {
     }catch (err){
     res.status(500).json(err)
     }
-    })
+    });
+
+    router.get('/farmer', async (req, res) => {
+        try{
+         const farmerData = await Farmer.findAll({
+           attributes: {}
+           });
+          const farmerList = farmerData.map((data) => data.get({plain: true}));
+          res.status(200).json(farmerList);
+          }catch(err){
+          res.status(500).json(err)
+          };
+        });
+
+    router.put('/farmer/:id' , async (req, res) => {
+         try{
+         const updatedFarmer = await Farmer.update({
+         farm_name: req.body.farm_name,
+         description: req.body.description,
+         location: req.body.location
+         },
+          {
+          where: {
+            id: req.params.id
+         }
+          })
+             
+         if(!updatedFarmer){
+         return  res.status(404).json({err: 'Produce not found'});
+         }
+         
+         res.status(200).json({message: 'Produce updated successfully}'});
+         }catch (err){
+        res.status(500).json(err)
+        
+     }
+})
+// need to figure out how to delete a parent key 
+router.delete('/produce/:id', async (req, res) => {
+     try{
+     const deletedProduce = await Produce.destroy({
+        where: {
+         id: req.params.id
+         }
+        });
+        if(!deletedProduce) {
+         return res.status(404).json({error: 'Produce not found'});
+         }
+         res.status(200).json({message: 'Produce deleted successfully'})
+        }catch (err){
+        res.status(500).json(err);
+     }
+});
+
+router.put('/produce/:id' , async (req,res) => {
+    try{
+     const updatedProduce = await Produce.update({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      avalibility: req.body.avalibility,
+      filename: req.body.filename,
+      farmerId: req.body.farmerId
+      },
+      {
+      where: {
+        id: req.params.id
+        }
+      });
+     if(!updatedProduce){
+     return  res.status(404).json({err: 'Produce not found'});
+     }
+     
+     res.status(200).json({message: 'Produce updated successfully'});
+    }catch (err){
+    res.status(500).json(err)
+    
+    }
+    });
+                
+
+
 
     module.exports = router
