@@ -43,19 +43,21 @@
   }
   
   .sidebar {
-    position: fixed; /* Changed from sticky to fixed */
+    position: fixed; /* Keep it fixed on the side */
     top: 0;
     left: 0;
     min-height: 100%;
-    width: 18rem; /* Set a fixed width */
-    padding: 1rem 0px;
+    width: 250px; /* Adjust width as necessary */
+    padding: 1rem 0;
     display: flex;
-    color: var(--white);
     flex-direction: column;
-    background-color: rgba(53, 62, 71, 0.95); /* Semi-transparent background */
-    transition: width 0.1s ease-in-out;
-    z-index: 100; /* Make sure sidebar is above background */
-  }
+    background-color: var(--sidebar-background); /* Semi-transparent background */
+    color: var(--white);
+    z-index: 100;
+}
+main {
+    padding-left: 250px; /* Same as the width of the sidebar */
+}
   .card {
     margin: 20px;
   }
@@ -111,6 +113,24 @@
     pointer-events: none;
     right: 1.5rem;
   }
+
+  .nav-links {
+    list-style-type: none; /* Remove bullets from list items */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.nav-links a {
+    padding: 1rem; /* Uniform padding for all links */
+    color: var(--white); /* Text color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make each link block-level */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-links a:hover {
+    background-color: var(--sidebar-primary-hover); /* Hover background color */
+}
   
   body.collapsed .search__wrapper svg {
     top: 50%;
@@ -394,6 +414,56 @@
     height: auto;
     display: block; /* Adjust if needed */
   }
+
+  .hero {
+    background-color: #85B79E; /* Or any color you prefer */
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 600px; /* Set a max-width for the content and center it */
+    margin: auto;
+    background: rgba(255, 255, 255, 0.8); /* A light background to make the text readable */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.hero h2,
+.hero p {
+    /* Adding text shadow for better visibility against the background */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    color: white; /* White color for the text */
+    margin-bottom: 20px; 
+}
+
+/* Remove background styles for the following classes */
+.features,
+.featured-farmers,
+.latest-produce,
+.feature,
+.farmer-profile,
+.produce-item {
+    background: none;
+    box-shadow: none;
+    color: white; /* Set text color to white for visibility */
+}
+
+/* Additional styling for text to make it stand out on the background */
+.features h3,
+.feature h4,
+.feature p,
+.featured-farmers h3,
+.farmer-profile h4,
+.farmer-profile p,
+.latest-produce h3,
+.produce-item h4,
+.produce-item p {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
   
   @keyframes fadeIn {
     from {

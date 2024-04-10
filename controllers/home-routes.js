@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {User, Farmer, Reviews, Produce} = require('../models/index');
 const withAuth = require('../utils/auth');
+const path = require('path');
 
 router.get('/', async (req, res) => {
 try {
@@ -181,7 +182,7 @@ router.put('/produce/:id' , async (req,res) => {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
-      avalibility: req.body.avalibility,
+      availability: req.body.availability,
       filename: req.body.filename,
       farmerId: req.body.farmerId
       },
@@ -228,4 +229,11 @@ router.delete('/farmer/:id' , async (req, res) => {
    res.status(500).json(err);
    }
 })
+
+router.get('/chat', (req, res) => {
+   //res.sendFile(path.join(__dirname, '..', 'views', 'chat.handlebars'));
+   res.render('chat');
+   // Or if you want to render with data:
+   // res.render('chat', { /* data */ });
+ });
 module.exports = router
