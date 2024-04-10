@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Crop-Club</title>
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Add other head elements like external fonts or scripts here -->
+ 
 
 </head>
 <body>
@@ -53,6 +53,16 @@
     <footer>
         <p>&copy; 2024 Crop-Club. All rights reserved.</p>
     </footer>
+
+    <!-- Include Socket.IO client library -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+  var socket = io();
+  socket.on('connect', function() {
+    console.log('Connected to the server via Socket.IO!');
+  });
+  </script>
 
     <!-- Link to your JavaScript files -->
     <script src="/js/script.js"></script>
