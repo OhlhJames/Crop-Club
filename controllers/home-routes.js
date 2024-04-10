@@ -32,6 +32,10 @@ router.get('/login', async (req, res) => {
    res.render('login')
 })
 
+router.get('/cart', async (req, res) => {
+   res.render('cart')
+})
+
 router.post('/produce', async (req,res) => {
     try{
        const produceData = await Produce.create({
