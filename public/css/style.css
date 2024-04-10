@@ -59,16 +59,22 @@ main {
     padding-left: 250px; /* Same as the width of the sidebar */
 }
   .card {
-    display: flex;
     margin: 20px;
-    flex: 0 1 300px;
-    max-width: 25%;
-    border: 10px var(--primary-color);
-    border-radius: 10px;
-    background-color: var(--farm-background);
-    color: var(--primary-color);
+  }
+
+
+  .card header{
+    display:flex;
+    justify-content: center;
+    font-size: 200%;
   }
   
+  .card h2{
+    display:flex;
+    justify-content: center;
+    font-size: 150%; 
+  }
+
   body.collapsed .sidebar {
     max-width: 5rem;
     display: flex;
