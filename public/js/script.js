@@ -24,11 +24,6 @@ allLinks.forEach((elem) => {
   });
 });
 
-const searchInput = document.querySelector(".search__wrapper input");
-
-searchInput.addEventListener("focus", (e) => {
-  document.body.classList.remove("collapsed");
-});
 
 const order = document.querySelector('#order-btn')
 
@@ -37,3 +32,9 @@ const orderSubmit = () => {
 }
 
 order.addEventListener('click', orderSubmit);
+
+const searchInput = document.querySelector(".search__wrapper input");
+
+searchInput.addEventListener("focus", (e) => {
+  document.body.classList.remove("collapsed");
+});
