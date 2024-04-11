@@ -1,4 +1,5 @@
-# Project2-Group6
+
+# Crop-Club  
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
