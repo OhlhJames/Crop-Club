@@ -80,13 +80,13 @@ router.post('/reviews', async (req,res) => {
     }  
 });
 
-router.get('/Produce', async (req,res) => {
+router.get('/produce', async (req,res) => {
     try{
       const produceData = await Produce.findAll({
         include: [
          {
             model: Reviews,
-            attributes: ['userId','rating','comment']
+            attributes: [ 'userId','rating','comment']
          }
         ]
       });
@@ -100,7 +100,7 @@ router.get('/Produce', async (req,res) => {
 });
 
 
-router.get('/reviews/id' ,async (req, res) => {
+router.get('/reviews/:id' ,async (req, res) => {
     try{
      const reviewData = await Reviews.findByPk(req.params.produceId, { 
        attributes:{}
@@ -163,7 +163,7 @@ router.put('/farmer/:id' , async (req, res) => {
    
 }
 })
-// need to figure out how to delete a parent key 
+
 router.delete('/produce/:id', async (req, res) => {
      try{
      const deletedProduce = await Produce.destroy({
@@ -209,10 +209,22 @@ router.put('/produce/:id' , async (req,res) => {
 
 router.get('/produce/:id' ,async (req, res) => {
 try{
-   const ProduceData = await Produce.findByPk(req.params.id, { 
-   attributes:{}
+   const productData = await Produce.findByPk(req.params.id, { 
+   include: [
+      {
+         model: Reviews,
+         attributes: [
+            'userId',
+            'rating',
+            'comment'
+         ],
+      },
+      ],
    });
-   res.status(200).json(ProduceData);
+   const product = productData.get({ plain: true});
+   res.render('reviews',{
+      product,
+   });
 }catch (err){
 res.status(500).json(err);
 }
