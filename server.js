@@ -44,32 +44,72 @@ app.use(routes);
 io.on('connection', (socket) => {
   console.log('A user connected');
 
-  socket.on('chat message', (msg) => {
-    // Echo the received message back to the client
-    //io.emit('chat message', `User: ${msg}`);
-
-    // Automated responses based on the message
+  socket.on('chat message', async (msg) => {
+    // Handle a simple greeting
     if (msg.toLowerCase().includes('hello')) {
       io.emit('chat message', 'Server: Hello!');
-    } else if (msg.toLowerCase().includes('availability')) {
-      // Call the function to check the product availability
-      const availability = getProductAvailability();
-      io.emit('chat message', `Server: The product is available, we have ${availability} in stock.`);
-    } else if (msg.toLowerCase().includes('thank you')) {
-      io.emit('chat message', 'Server: It has been a pleasure to help you!');
     }
+    // Improved check for product availability questions
+    else if (msg.toLowerCase().includes('available')) {
+      // Use a regular expression to find a pattern like "[product] available"
+      const match = msg.match(/(.*)\savailable/i);
+  
+      // If there's a match and a product name could be extracted
+      if (match && match[1]) {
+        const productName = match[1].trim();
+  
+        // Call the function to check product availability and reviews
+        const availabilityAndReviews = await getProductAvailability(productName);
+        io.emit('chat message', `Server: ${availabilityAndReviews}`);
+      } else {
+        io.emit('chat message', 'Server: Please specify a product name.');
+      }
+    }
+    // Respond to a thank you message
+    else if (msg.toLowerCase().includes('thank you')) {
+      io.emit('chat message', 'Server: You\'re welcome! It has been a pleasure to help you.');
+    }    
   });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
+  
+  
+  
 });
 
-function getProductAvailability() {
-  // This is an example function that should interact with your database or data source
-  // to get real product availability. For now, it returns a static value.
-  return 10; // Example static value
+async function getProductAvailability(productName) {
+  try {
+    const product = await sequelize.models.produce.findOne({
+      where: { name: productName },
+    });
+
+    if (product) {
+      // Check if the product is available
+      if (product.availability) {
+        const reviews = await sequelize.models.review.findAll({
+          where: { produceId: product.id },
+          attributes: ['comment', 'rating'],
+        });
+
+        let reviewsMessage = reviews.length > 0 ? 'Reviews:\n' : 'No reviews yet.\n';
+        reviews.forEach(review => {
+          reviewsMessage += `Rating: ${review.rating}, Comment: "${review.comment}"\n`;
+        });
+
+        return `The product ${productName} is available. ${reviewsMessage}`;
+      } else {
+        // Return a message for unavailable products
+        return `We are sorry, ${productName} is currently not available. We will contact you when the product is available again.`;
+      }
+    } else {
+      return `Product ${productName} not found.`;
+    }
+  } catch (error) {
+    console.error('Error fetching product availability and reviews:', error);
+    return 'An error occurred while fetching product details.';
+  }
 }
+
+
+
 
 // Database synchronization
 sequelize.sync({ force: false }).then(() => {
