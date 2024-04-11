@@ -6,47 +6,20 @@
 </section>
 
 <!-- Features Section -->
-<section class="features">
-    <h3>Why Choose Crop-Club?</h3>
-    <div class="features-container">
-        <div class="feature">
-            <h4>Fresh Produce</h4>
-            <p>Access a variety of fresh and locally grown fruits and vegetables.</p>
-        </div>
-        <div class="feature">
-            <h4>Support Local</h4>
-            <p>Each purchase helps support local farmers and sustainable practices.</p>
-        </div>
-        <div class="feature">
-            <h4>Community Driven</h4>
-            <p>Join a community that values health, quality, and connection.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Featured Farmers Section -->
-<section class="featured-farmers">
-    <h3>Meet Our Farmers</h3>
-    <div class="farmers-list">
-        {{#each farmers}}
-        <article class="farmer-profile">
-            <h4>{{this.name}}</h4>
-            <p>{{this.bio}}</p>
-        </article>
-        {{/each}}
-    </div>
-</section>
-
-<!-- Latest Produce Section -->
-<section class="latest-produce">
-    <h3>Latest Produce</h3>
-    <div class="produce-list">
-        {{#each produce}}
-        <article class="produce-item">
-            <h4>{{this.name}}</h4>
-            <p>{{this.description}}</p>
-            <p>Price: ${{this.price}}</p>
-        </article>
-        {{/each}}
-    </div>
-</section>
+ <section class="features max-w-xl mx-auto my-8">
+            <h3 class="text-3xl font-semibold mb-6 text-black">Why Choose Crop-Club?</h3>
+            <div class="features-container grid grid-cols-1 gap-6">
+                <div class="feature bg-white rounded-lg p-6">
+                    <h4 class="text-xl font-semibold mb-2 text-black">Fresh Produce</h4>
+                    <p class="text-black">Access a variety of fresh and locally grown fruits and vegetables.</p>
+                </div>
+                <div class="feature bg-white rounded-lg p-6">
+                    <h4 class="text-xl font-semibold mb-2 text-black">Support Local</h4>
+                    <p class="text-black">Each purchase helps support local farmers and sustainable practices.</p>
+                </div>
+                <div class="feature bg-white rounded-lg p-6">
+                    <h4 class="text-xl font-semibold mb-2 text-black">Community Driven</h4>
+                    <p class="text-black">Join a community that values health, quality, and connection.</p>
+                </div>
+            </div>
+        </section>
