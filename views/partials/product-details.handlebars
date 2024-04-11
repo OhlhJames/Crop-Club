@@ -1,4 +1,4 @@
-<section class="card flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+<section class="card flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 flex-col">
   <a href="/produce/{{id}}">
     <header>{{name}}</header>
     <img src="/assets/{{filename}}" alt="{{description}}">
@@ -6,4 +6,5 @@
     <h3>{{reviews.[0].rating}}⭐</h3>
     <p>{{reviews.[0].comment}}</p>
   </a>
+
 </section>

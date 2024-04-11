@@ -29,3 +29,11 @@ const searchInput = document.querySelector(".search__wrapper input");
 searchInput.addEventListener("focus", (e) => {
   document.body.classList.remove("collapsed");
 });
+
+const order = document.querySelector('#order-btn')
+
+const orderSubmit = () => {
+  window.alert('Your order has been sent to the farmer!')
+}
+
+order.addEventListener('click', orderSubmit);
