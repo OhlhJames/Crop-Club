@@ -131,10 +131,17 @@ router.delete('/reviews/:id' , async (req, res) => {
 router.get('/farmer', async (req, res) => {
    try{
       const farmerData = await Farmer.findAll({
-         attributes: {}
+         include:[
+            {
+               model:Produce,
+               attributes:['id','name','filename','description']
+            },
+         ]         
+      });
+         const farmers = farmerData.map((farmer) => farmer.get({plain: true}));
+         res.render('farmer',{
+            farmers,
          });
-         const farmerList = farmerData.map((data) => data.get({plain: true}));
-         res.status(200).json(farmerList);
          }catch(err){
          res.status(500).json(err)
          };
