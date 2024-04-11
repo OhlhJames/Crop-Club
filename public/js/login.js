@@ -53,13 +53,13 @@ document.querySelector('#signup-form').addEventListener('submit', signupForm);
 const logout = async () => {
     console.log('Logout function called');
     const response = await fetch('/api/users/logout', {
-        method: 'POST',
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     });
 
     if(response.ok){
         alert('Bye, see you next time');
-        document.location.replace('/');
+        document.location.replace('/login'); 
     }else {
         alert('Failed to log out');
     }
