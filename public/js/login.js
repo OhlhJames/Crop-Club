@@ -13,10 +13,12 @@ const loginForm = async (event) => {
         });
 
         if (response.ok) {
+            alert('Welcome to Crob-Club');
             document.location.replace('/');
-        }else {
+        } else {
             alert('Failed to log in');
         }
+        
     }
 };
 
@@ -49,16 +51,36 @@ document.querySelector('#signup-form').addEventListener('submit', signupForm);
 
 
 const logout = async () => {
+    console.log('Logout function called');
     const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     });
 
     if(response.ok){
+        alert('Bye, see you next time');
         document.location.replace('/');
     }else {
-        alert('Failed to log out')
+        alert('Failed to log out');
     }
+    
 };
 
 document.querySelector('#logout').addEventListener('click', logout)
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginFormEl = document.querySelector('#login-form');
+    if (loginFormEl) {
+        loginFormEl.addEventListener('submit', loginForm);
+    }
+
+    const signupFormEl = document.querySelector('#signup-form');
+    if (signupFormEl) {
+        signupFormEl.addEventListener('submit', signupForm);
+    }
+
+    const logoutButton = document.querySelector('#logout');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', logout);
+    }
+});
