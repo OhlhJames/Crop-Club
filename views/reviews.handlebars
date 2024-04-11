@@ -1,11 +1,15 @@
-<section class="card flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-  <h3 class="product-name">{{product.name}}</h3>
-  <h4>Farm: {{product.farmId}}</h4>
-  <img src="/assets/{{product.filename}}" alt="{{product.description}}">
-  <h4>description: {{product.description}}</h4>
-  <section class="card flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-    {{#each product.review as |review|}}
-    {{> review-details}}
-    {{/each}}
+<section class="flex justify-center items-center">
+  <section class="card flex  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+    <section>
+      <header class="product-name">{{product.name}}</header>
+      <h2>Farm: {{product.farmId}}</h2>
+      <img src="/assets/{{product.filename}}" alt="{{product.description}}">
+      <h4>description: {{product.description}}</h4>
+      <section>
+        {{#each product.reviews as |review|}}
+        {{> review-details}}
+        {{/each}}
+      </section>
+    </section>
   </section>
 </section>
