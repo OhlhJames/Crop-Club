@@ -8,6 +8,12 @@ const reviewData = [
     userId: 1, // Assuming you have the correct foreign key reference
     produceId: 1, // Assuming you have the correct foreign key reference
   },
+  {
+  rating: 5, 
+  comment: "Freshest apples I've had!", 
+  userId: 2, // Assuming you have the correct foreign key reference
+  produceId: 1, // Assuming you have the correct foreign key reference
+  },
   { 
     rating: 4, 
     comment: 'Great eggs, very fresh.', 
