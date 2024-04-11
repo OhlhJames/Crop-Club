@@ -3,11 +3,12 @@ const loginForm = async (event) => {
 
     const username = document.querySelector('#username').value.trim();
     const password = document.querySelector('#password').value.trim();
+    const email = document.querySelector('#email-login').value.trim();
 
-    if(email&&password){
-        const response = await fetch('api/users/login', {
+    if(username&&email&&password){
+        const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({username, email, password}),
             headers: {'Content-Type': 'application/json'},
         });
 
@@ -41,5 +42,23 @@ const signupForm = async (event) => {
     }
 };
 
-document.querySelector('#login-form').addEventListener('submit', signupForm ); //you have to call the form class name because it is a form
-document.querySelector('#signup-form').addEventListener('submit', loginForm);
+
+
+document.querySelector('#login-form').addEventListener('submit', loginForm ); //you have to call the form class name because it is a form
+document.querySelector('#signup-form').addEventListener('submit', signupForm);
+
+
+const logout = async () => {
+    const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if(response.ok){
+        document.location.replace('/');
+    }else {
+        alert('Failed to log out')
+    }
+};
+
+document.querySelector('#logout').addEventListener('click', logout)
